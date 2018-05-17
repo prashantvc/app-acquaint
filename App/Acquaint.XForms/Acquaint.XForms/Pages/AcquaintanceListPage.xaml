@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Acquaint.XForms.AcquaintanceListPage" xmlns:local="clr-namespace:Acquaint.XForms" xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations" x:Name="acquaintanceListPage" NavigationPage.BackButtonTitle="List">
 	<ContentPage.Resources>
 		<ResourceDictionary>
@@ -35,9 +35,9 @@
 									<StackLayout Orientation="Horizontal" Spacing="0" AbsoluteLayout.LayoutFlags="XProportional" AbsoluteLayout.LayoutBounds="0,0,AutoSize,AutoSize">
 										<ContentView Margin="3" WidthRequest="54">
 											<ffimageloading:CachedImage HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="50" HeightRequest="50" DownsampleToViewSize="true" Source="{Binding SmallPhotoUrl}" LoadingPlaceholder="placeholderProfileImage.png">
-												<ffimageloading:CachedImage.Transformations>
+												<!--<ffimageloading:CachedImage.Transformations>
 													<fftransformations:CircleTransformation />
-												</ffimageloading:CachedImage.Transformations>
+												</ffimageloading:CachedImage.Transformations>-->
 											</ffimageloading:CachedImage>
 										</ContentView>
 										<ContentView Padding="10,0,0,0">
@@ -71,9 +71,9 @@
 											<StackLayout Orientation="Horizontal" Spacing="0">
 												<ContentView Margin="3" WidthRequest="54">
 													<ffimageloading:CachedImage HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="50" HeightRequest="50" DownsampleToViewSize="true" Source="{Binding SmallPhotoUrl}" LoadingPlaceholder="placeholderProfileImage.png">
-														<ffimageloading:CachedImage.Transformations>
+														<!--<ffimageloading:CachedImage.Transformations>
 															<fftransformations:CircleTransformation />
-														</ffimageloading:CachedImage.Transformations>
+														</ffimageloading:CachedImage.Transformations>-->
 													</ffimageloading:CachedImage>
 												</ContentView>
 												<ContentView Padding="10,0,0,0">
