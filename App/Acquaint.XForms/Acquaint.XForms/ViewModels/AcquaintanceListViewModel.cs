@@ -6,8 +6,9 @@ using Acquaint.Util;
 using FormsToolkit;
 using Microsoft.Practices.ServiceLocation;
 using MvvmHelpers;
-using Plugin.Messaging;
+
 using Xamarin.Forms;
+using Xamarin.Essentials;
 
 namespace Acquaint.XForms
 {
@@ -176,13 +177,11 @@ namespace Acquaint.XForms
             if (acquaintance == null)
                 return;
 
-            if (_CapabilityService.CanMakeCalls)
+            try
             {
-                var phoneCallTask = MessagingPlugin.PhoneDialer;
-                if (phoneCallTask.CanMakePhoneCall)
-                    phoneCallTask.MakePhoneCall(acquaintance.Phone.SanitizePhoneNumber());
+				PhoneDialer.Open(acquaintance.Phone.SanitizePhoneNumber());
             }
-            else
+			catch
             {
                 MessagingService.Current.SendMessage<MessagingServiceAlert>(MessageKeys.DisplayAlert, new MessagingServiceAlert()
                 {
@@ -218,13 +217,14 @@ namespace Acquaint.XForms
             if (acquaintance == null)
                 return;
 
-            if (_CapabilityService.CanSendMessages)
+			try
             {
-                var messageTask = MessagingPlugin.SmsMessenger;
-                if (messageTask.CanSendSms)
-                    messageTask.SendSms(acquaintance.Phone.SanitizePhoneNumber());
+               
+				var message = new SmsMessage(string.Empty, acquaintance.Phone.SanitizePhoneNumber());
+				Sms.ComposeAsync(message)
+				   .ContinueWith(x => System.Diagnostics.Debug.WriteLine(x));
             }
-            else
+			catch
             {
                 MessagingService.Current.SendMessage<MessagingServiceAlert>(MessageKeys.DisplayAlert, new MessagingServiceAlert()
                 {
@@ -260,13 +260,12 @@ namespace Acquaint.XForms
             if (acquaintance == null)
                 return;
 
-            if (_CapabilityService.CanSendEmail)
+			try
             {
-                var emailTask = MessagingPlugin.EmailMessenger;
-                if (emailTask.CanSendEmail)
-                    emailTask.SendEmail(acquaintance.Email);
+				Email.ComposeAsync(string.Empty, string.Empty, acquaintance.Email)
+					 .ContinueWith(p => System.Diagnostics.Debug.WriteLine(p));
             }
-            else
+			catch
             {
                 MessagingService.Current.SendMessage<MessagingServiceAlert>(MessageKeys.DisplayAlert, new MessagingServiceAlert()
                 {
